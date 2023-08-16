@@ -1,0 +1,56 @@
++++
+whoami = "Tyrone"
+
+category = "foo"
+tags = ["foo", "bar"]
+my_list = ["list-item-a", "list-item-b"]
+
+# [load.httpbin]
+# method = "POST"
+# url = "https://httpbin.org/post"
+# [load.httpbin.body]
+# foo = "baz"
+
+load.images_thumb = "@/images-thumbnail.json"
++++
+{% extends "_layout/layout.html" %}
+{# This is necessary for now, so that all entry data is not added to a template always! #}
+{% set entry = entry(path = entry_path) -%}
+{% block page %}
+<div>
+  <p>Hello {{entry.whoami}}</p>
+  <a href="@/page">Go to Page</a>
+
+  <div>
+    This is for the TOML frontmatter:
+    {#
+    {{entry.httpbin.data | json_encode(pretty = true) | safe }}
+    #}
+  </div>
+
+  <div>
+    <h2>Image:</h2>
+    {{ entry.images_thumb | json_encode(pretty = true) | safe }}
+    <br />
+    {% set my_image = image(
+      in="images/slug-unsplash.jpg",
+      format=entry.images_thumb.format,
+      operations=entry.images_thumb.operations,
+    ) %}
+    <figure>
+      <img src="data:{{my_image.mime_type}};base64,{{base64(file = my_image.path)}}"
+           width="512px"
+           height="auto"
+      >
+      <figcaption><a href="https://unsplash.com/photos/Gy-CTxAo0rI">base64</a></figcaption>
+    </figure>
+    <figure>
+      <img src="{{my_image.url}}"
+           width="512px"
+           height="auto"
+      >
+      <figcaption><a href="https://unsplash.com/photos/Gy-CTxAo0rI">Url</a></figcaption>
+    </figure>
+  </div>
+</div>
+{% endblock page %}

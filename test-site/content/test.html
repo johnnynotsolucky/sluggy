@@ -1,0 +1,35 @@
++++
+whoami = "Tyrone"
+
+category = "foo"
+tags = ["foo", "bar"]
+my_list = ["list-item-a", "list-item-b"]
+
+[generate_from]
+selector = "/my_list"
+index_pattern = '''^list-(?P<item>.*)$'''
+filename_format = "list-[item]"
++++
+{% extends "_layout/layout.html" %}
+{# This is necessary for now, so that all entry data is not added to a template always! #}
+{% set entry = entry(path = entry_path) -%}
+{% block page %}
+<div>
+  <div>{{entry.generate}}</div>
+  <p>Hello {{entry.whoami}}</p>
+  <a href="@/page">Go to Page</a>
+
+  <div>
+
+  </div>
+</div>
+This is for the TOML frontmatter:
+
+[load]
+method = "POST"
+url = "https://httpbin.org/post"
+[load.body]
+foo = "bar"
+
+use `entry.loaded.data`
+{% endblock page %}

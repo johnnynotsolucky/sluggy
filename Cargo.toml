@@ -1,0 +1,72 @@
+[workspace]
+members = [
+  "sluggy",
+  "sluggy_core",
+  "sluggy_macros",
+]
+
+[workspace.dependencies]
+sluggy_core = { path = "sluggy_core" }
+sluggy_macros = { path = "sluggy_macros" }
+json_pointer = { git = "https://github.com/johnnynotsolucky/json_pointer.git" }
+imageless = { git = "https://github.com/johnnynotsolucky/imageless.git" }
+serde = "1.0.152"
+serde_derive = "1.0.152"
+serde_json = "1.0.93"
+comrak = { version = "0.18.0", default-features = false }
+regex = "1.7.1"
+chrono = { version = "0.4.23", features = ["serde"] }
+tera = { version = "1.17.1", features = ["preserve_order"] }
+tokio = { version = "1.25.0", features = ["full"] }
+miette = { version = "5.5.0", features = ["fancy"] }
+thiserror = "1.0.40"
+clap = { version = "4.1.6", features = ["derive"] }
+tower = "0.4.13"
+tower-http = { version = "0.4.0", features = ["full"] }
+axum-extra = "0.7.0"
+axum = { version = "0.6.6", features = ["macros", "http2", "headers"] }
+hyper = "0.14.25"
+opentelemetry_api = "0.19.0"
+opentelemetry_sdk = { version = "0.19.0", features = ["rt-tokio"] }
+opentelemetry-otlp = "0.12.0"
+tracing = "0.1.37"
+tracing-opentelemetry = { version = "0.19.0", features = ["thiserror"] }
+tracing-subscriber = { version = "0.3.16", features = ["env-filter"] }
+dotenvy = "0.15.6"
+mime_guess = "2.0.4"
+mime = "0.3.16"
+futures = "0.3.26"
+async-compression = { version = "0.4.0", features = ["tokio", "brotli", "gzip", "zlib"] }
+syntect = "5.0.0"
+dashmap = { version = "5.4.0", features = ["rayon", "serde"] }
+lightningcss = { version = "1.0.0-alpha.42", features = ["browserslist"] }
+browserslist-rs = "0.12"
+lol_html = "1.0.1"
+minify-html-onepass = "0.11.1"
+toml = "0.7.2"
+notify = { version = "6.0.0", features = ["macos_kqueue"] }
+notify-debouncer-mini = "0.3.0"
+http = "0.2.9"
+http-serde = "1.1.2"
+jql = "7.0.0"
+reqwest = { version = "0.11.14", features = ["blocking", "json"] }
+url = "2.3.0"
+smallvec = "1.10.0"
+itertools = "0.11.0"
+sha2 = "0.10.7"
+base64 = "0.21.2"
+
+# Config for 'cargo dist'
+[workspace.metadata.dist]
+# The preferred cargo-dist version to use in CI (Cargo.toml SemVer syntax)
+cargo-dist-version = "0.0.4"
+# The preferred Rust toolchain to use in CI (rustup toolchain syntax)
+rust-toolchain-version = "1.67.1"
+# CI backends to support (see 'cargo dist generate-ci')
+ci = ["github"]
+# Target platforms to build apps for (Rust target-triple syntax)
+targets = ["x86_64-unknown-linux-gnu", "x86_64-apple-darwin", "x86_64-pc-windows-msvc", "aarch64-apple-darwin"]
+
+# The profile that 'cargo dist' will build with
+[profile.dist]
+inherits = "release"

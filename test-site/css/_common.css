@@ -1,0 +1,92 @@
+:root {
+  --body-font: Georgia, serif;
+  --header-font: Tahoma, Helvetica, sans-serif;
+
+  --dark-primary-color: #f53190;
+  --dark-text-color: white;
+  --dark-inline-code-color: #ff60ad;
+  --dark-background-color: #2e2459;
+  --dark-content-highlight-color: var(--dark-primary-color);
+  --dark-content-background-color: #2a3439;
+  --dark-alt-background-color: #2b3445;
+
+  --light-primary-color: #f53190;
+  --light-text-color: #2a3439;
+  --light-inline-code-color: #ff60ad;
+  --light-background-color: white;
+  --light-content-highlight-color: var(--dark-primary-color);
+  --light-content-background-color: white;
+  --light-alt-background-color: #e3e3e3;
+
+  --primary-color: var(--dark-primary-color);
+  --text-color: var(--dark-text-color);
+  --inline-code-color: var(--dark-inline-code-color);
+  --background-color: var(--dark-background-color);
+  --content-highlight-color: var(--dark-content-highlight-color);
+  --content-background-color: var(--dark-content-background-color);
+  --alt-background-color: var(--dark-alt-background-color);
+}
+
+html {
+  color-scheme: dark;
+  font-size: 62.5%;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 200ms ease-in-out, color 200ms ease-in-out;
+}
+
+@media (prefers-color-scheme:light){
+  :root {
+    --primary-color: var(--light-primary-color);
+    --text-color: var(--light-text-color);
+    --inline-code-color: var(--light-inline-code-color);
+    --background-color: var(--light-background-color);
+    --content-highlight-color: var(--light-content-highlight-color);
+    --content-background-color: var(--light-content-background-color);
+    --alt-background-color: var(--light-alt-background-color);
+  }
+}
+
+a, article, aside, blockquote, body, code, dd, div, dl, dt, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, html, input[type="email"], input[type="number"], input[type="password"], input[type="tel"], input[type="text"], input[type="url"], legend, li, main, nav, ol, p, pre, section, table, td, textarea, th, tr, ul {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--body-font);
+  margin: 0;
+  font-size: 1.75em;
+  font-weight: 400;
+  line-height: 1.6;
+
+  /* Ensure the footer is always at the bottom of the screen */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-width {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  width: 100%;
+  max-width: none;
+}
+
+@media screen and (min-width: 60em) {
+  .page-width {
+    max-width: 96rem;
+  }
+}
+
+@media screen and (min-width: 30em) and (max-width: 60em) {
+  .page-width {
+    max-width: 64rem;
+  }
+}
+
+@media screen and (min-width: 30em) {
+  html {
+    font-size: 75%;
+  }
+}

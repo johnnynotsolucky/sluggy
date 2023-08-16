@@ -1,0 +1,11 @@
+[package]
+name = "sluggy_macros"
+version = "0.0.1"
+edition = "2021"
+
+[lib]
+proc-macro = true
+
+[dependencies]
+quote = "1.0.26"
+syn = { version = "2.0.12", features = ["full"] }

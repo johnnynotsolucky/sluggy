@@ -1,0 +1,14 @@
+{% extends "_layout/layout.html" %}
+{% block page %}
+<section id="{{entry.title}}">
+  <div>
+    <header>
+      <h2>{{ entry.title }}</h2>
+    </header>
+
+    <div class="post">
+      {{ render_content(path = entry_path) | safe }}
+    </div>
+  </div>
+</section>
+{% endblock page %}

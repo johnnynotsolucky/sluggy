@@ -1,0 +1,23 @@
+out_dir = "test-site/out" # Default: out
+compress_content = true # Default value
+
+[generate]
+content_dir = "test-site/content" # Default: content
+css_dir = "test-site/css" # Default: css
+template_dir = "test-site/templates" # Default: templates
+assets_dir = "test-site/assets" # Default: assets
+data_dir = "test-site/data" # Default: data
+minify = false # Default: true
+taxonomies = ["tags", "category"]
+
+# extra field
+title = "Sluggy test site"
+description = "Test site"
+maintained_by = "Tyrone Tudehope"
+
+[serve]
+generate = true # Default value
+host = "0.0.0.0" # Default value
+port = 8000 # Default value
+content_encoding = "brotli" # Default value
+store = "in-memory" # Default value

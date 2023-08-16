@@ -1,0 +1,30 @@
+{
+  "format":  {
+    "jpeg": {
+      "quality": 80
+    }
+  },
+  "operations" :[
+    {
+      "resize": {
+        "crop_mode": "preserve",
+        "filter": "nearest",
+        "height": {
+          "pixel": {
+            "pixels": 32
+          }
+        },
+        "width": {
+          "pixel": {
+            "pixels": 32
+          }
+        }
+      }
+    },
+    {
+      "blur": {
+        "sigma": 1
+      }
+    }
+  ]
+}

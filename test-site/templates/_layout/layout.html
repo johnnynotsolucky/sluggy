@@ -1,0 +1,62 @@
+{% set title = site.title -%}
+{% set meta_title = site.title -%}
+
+{% if entry_path -%}
+  {% set entry = entry_path | entry -%}
+{% endif -%}
+
+{% if entry -%}
+  {% if entry.section_handle -%}
+    {% set section = sections(handle = entry.section_handle) -%}
+    {% if section -%}
+      {% set title = title ~ " | " ~ section.title -%}
+      {% set meta_title = section.title -%}
+    {% endif -%}
+  {% endif -%}
+  {% if entry.title -%}
+    {% set title = title ~ " | " ~ entry.title -%}
+    {% set meta_title = entry.title -%}
+  {% endif -%}
+  {% if entry.description -%}
+    {% set meta_description = entry.description -%}
+  {% elif section.description -%}
+    {% set meta_description = section.description -%}
+  {% elif site.description -%}
+    {% set meta_description = site.description -%}
+  {% endif -%}
+{% endif -%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    {% block title -%}
+    <title>{{ title }}</title>
+    {% endblock title -%}
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    {% include "_layout/headers.html" -%}
+    <meta name="description" content="{{meta_description}}">
+
+    <!-- styles -->
+    <link rel="stylesheet" href="@/css/main.css" embed/>
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+    <!-- atom -->
+    {#
+    {% if section %}
+    <link type="application/atom+xml" rel="alternate" href="{{base}}{{section.prefix}}feed.xml" title="{{section.title}}" />
+    {% endif %}
+    #}
+    {% block headers -%}{% endblock headers -%}
+  </head>
+  <body>
+    <div class="page-width">
+      {% block page %}{% endblock page -%}
+    </div>
+  </body>
+</html>

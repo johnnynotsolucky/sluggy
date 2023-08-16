@@ -1,0 +1,20 @@
+[format]
+jpeg = { quality = 20 }
+
+[[operations]]
+[operations.resize]
+filter = "nearest"
+crop_mode = "preserve"
+
+[operations.resize.width.pixel]
+pixels = 256
+
+[operations.resize.height.pixel]
+pixels = 256
+
+[[operations]]
+[operations.grayscale]
+
+# [[operations]]
+# [operations.blur]
+# sigma = 10
