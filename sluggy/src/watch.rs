@@ -6,24 +6,23 @@ use futures::{
 use notify::{RecommendedWatcher, RecursiveMode};
 use sluggy_core::error::Result;
 use std::{future::Future, path::Path, time::Duration};
+use std::path::PathBuf;
 use tokio::{runtime::Handle, task::block_in_place};
 
-pub struct Watch<P, H, I>
+pub struct Watch<H, I>
 where
-	P: AsRef<Path>,
 	H: WatchHandler,
-	I: Iterator<Item = P>,
+	I: Iterator<Item = PathBuf>,
 {
 	paths: I,
 	timeout: Duration,
 	handler: H,
 }
 
-impl<P, H, I> Watch<P, H, I>
+impl<H, I> Watch<H, I>
 where
-	P: AsRef<Path>,
 	H: WatchHandler,
-	I: Iterator<Item = P>,
+	I: Iterator<Item = PathBuf>,
 {
 	pub fn new(paths: I, timeout: Duration, handler: H) -> Self {
 		Self {
@@ -33,7 +32,7 @@ where
 		}
 	}
 
-	pub async fn watch(&mut self) -> Result<()> {
+	pub async fn watch(mut self) -> Result<()> {
 		let (mut debouncer, mut rx) = create_debounced_watcher(self.timeout)?;
 
 		for path in self.paths.by_ref() {

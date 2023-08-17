@@ -86,11 +86,11 @@ impl Command {
 
 				let mut watcher = Watch::new(
 					[
-						&generate_config.content_dir,
-						&generate_config.assets_dir,
-						&generate_config.template_dir,
-						&generate_config.css_dir,
-						&generate_config.out_dir,
+						generate_config.content_dir.clone(),
+						generate_config.assets_dir.clone(),
+						generate_config.template_dir.clone(),
+						generate_config.css_dir.clone(),
+						generate_config.out_dir.clone(),
 					]
 					.into_iter(),
 					Duration::from_millis(250),
@@ -132,13 +132,12 @@ impl Command {
 					},
 				);
 
+				let serve_handle = tokio::spawn(serve(server_config));
+				let watch_handle = tokio::spawn(watcher.watch());
+
 				select! {
-					res = serve(server_config) => {
-						res?
-					},
-					res = watcher.watch() => {
-						res?
-					},
+					_ = serve_handle => {},
+					_ = watch_handle => {},
 				}
 			}
 		}
