@@ -450,6 +450,7 @@ pub async fn serve(config: Arc<ServerConfig>) -> Result<()> {
 		TcpListener::bind(&address),
 		IoError(format!("Unable to bind to {address}")),
 	)?;
+
 	let server = axum::Server::from_tcp(listener)?
 		.serve(static_handler.into_make_service())
 		.with_graceful_shutdown(shutdown_signal());

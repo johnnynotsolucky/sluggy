@@ -49,5 +49,5 @@ notify-debouncer-mini = { workspace = true }
 tikv-jemallocator = { version = "0.5", optional = true }
 
 [features]
-default = ["jemallocator"]
+default = []
 jemallocator = ["dep:tikv-jemallocator"]
