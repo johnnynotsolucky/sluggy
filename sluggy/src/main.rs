@@ -1,9 +1,9 @@
-#[cfg(all(feature = "jemallocator", not(target_env = "msvc")))]
-use tikv_jemallocator::Jemalloc;
-
-#[cfg(all(feature = "jemallocator", not(target_env = "msvc")))]
-#[global_allocator]
-static GLOBAL: Jemalloc = Jemalloc;
+// #[cfg(all(feature = "jemallocator", not(target_env = "msvc")))]
+// use tikv_jemallocator::Jemalloc;
+// 
+// #[cfg(all(feature = "jemallocator", not(target_env = "msvc")))]
+// #[global_allocator]
+// static GLOBAL: Jemalloc = Jemalloc;
 
 use clap::{Parser, Subcommand};
 use config::Config;
