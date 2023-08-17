@@ -140,24 +140,25 @@ impl Command {
 						}
 					}
 				});
+				serve_handle.await?
 
-				let watch_handle = tokio::spawn({
-					let server_config = server_config.clone();
-					async move {
-						if server_config.clone().watch {
-							if let Err(error) = watcher.watch().await {
-								println!("Error: {error}");
-							}
-						} else {
-							futures::pending!()
-						}
-					}
-				});
-
-				select! {
-					_ = serve_handle => {},
-					_ = watch_handle => {},
-				}
+				// let watch_handle = tokio::spawn({
+				// 	let server_config = server_config.clone();
+				// 	async move {
+				// 		if server_config.clone().watch {
+				// 			if let Err(error) = watcher.watch().await {
+				// 				println!("Error: {error}");
+				// 			}
+				// 		} else {
+				// 			futures::pending!()
+				// 		}
+				// 	}
+				// });
+				//
+				// select! {
+				// 	_ = serve_handle => {},
+				// 	_ = watch_handle => {},
+				// }
 			}
 		}
 

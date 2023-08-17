@@ -12,7 +12,7 @@ pub type Result<T> = StdResult<T, Error>;
 pub enum Error {
 	#[error("json pointer error")]
 	JsonPointer(#[from] JsonPointerError),
-	#[error("notify error")]
+	#[error(transparent)]
 	NotifyError(#[from] NotifyError),
 	#[error("join error")]
 	JoinError(#[from] JoinError),
