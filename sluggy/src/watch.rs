@@ -5,8 +5,11 @@ use futures::{
 };
 use notify::{RecommendedWatcher, RecursiveMode};
 use sluggy_core::error::Result;
-use std::{future::Future, path::Path, time::Duration};
-use std::path::PathBuf;
+use std::{
+	future::Future,
+	path::{Path, PathBuf},
+	time::Duration,
+};
 use tokio::{runtime::Handle, task::block_in_place};
 
 pub struct Watch<H, I>

@@ -17,6 +17,7 @@ maintained_by = "Tyrone Tudehope"
 
 [serve]
 generate = true # Default value
+watch = true # Default value
 host = "0.0.0.0" # Default value
 port = 8000 # Default value
 content_encoding = "brotli" # Default value

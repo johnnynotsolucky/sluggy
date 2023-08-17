@@ -34,6 +34,7 @@ pub struct ServerConfig {
 	pub compressed_content_dir: PathBuf,
 	pub serve_dir: PathBuf,
 	pub generate: bool,
+	pub watch: bool,
 	pub host: String,
 	pub port: u16,
 	pub content_encoding: ContentEncoding,

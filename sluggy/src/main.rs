@@ -84,7 +84,7 @@ impl Command {
 					Generator::generate(generate_config.clone()).await?;
 				}
 
-				let mut watcher = Watch::new(
+				let watcher = Watch::new(
 					[
 						generate_config.content_dir.clone(),
 						generate_config.assets_dir.clone(),
@@ -132,8 +132,27 @@ impl Command {
 					},
 				);
 
-				let serve_handle = tokio::spawn(serve(server_config));
-				let watch_handle = tokio::spawn(watcher.watch());
+				let serve_handle = tokio::spawn({
+					let server_config = server_config.clone();
+					async move {
+						if let Err(error) = serve(server_config).await {
+							println!("Error: {error}");
+						}
+					}
+				});
+
+				let watch_handle = tokio::spawn({
+					let server_config = server_config.clone();
+					async move {
+						if server_config.clone().watch {
+							if let Err(error) = watcher.watch().await {
+								println!("Error: {error}");
+							}
+						} else {
+							futures::pending!()
+						}
+					}
+				});
 
 				select! {
 					_ = serve_handle => {},

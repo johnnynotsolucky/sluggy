@@ -47,8 +47,10 @@ pub struct GenerateConfig {
 
 #[derive(Debug, Clone, Deserialize)]
 pub struct ServeConfig {
-	#[serde(default = "default_generate")]
+	#[serde(default = "default_true")]
 	pub generate: bool,
+	#[serde(default = "default_true")]
+	pub watch: bool,
 	pub host: Option<String>,
 	pub port: Option<u16>,
 	#[serde(default)]
@@ -60,7 +62,8 @@ pub struct ServeConfig {
 impl Default for ServeConfig {
 	fn default() -> Self {
 		Self {
-			generate: default_generate(),
+			generate: default_true(),
+			watch: default_true(),
 			host: Option::default(),
 			port: Option::default(),
 			content_encoding: ContentEncoding::default(),
@@ -69,7 +72,7 @@ impl Default for ServeConfig {
 	}
 }
 
-fn default_generate() -> bool {
+fn default_true() -> bool {
 	true
 }
 
@@ -191,6 +194,7 @@ impl TryFrom<Config> for (SluggyGenerateConfig, SluggyServerConfig) {
 
 		let server_config = SluggyServerConfig {
 			generate: server_config.generate,
+			watch: server_config.watch,
 			host,
 			port,
 			serve_dir,
