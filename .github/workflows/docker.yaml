@@ -32,7 +32,11 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
       - name: build sluggy
-        run: cargo build --release -p sluggy
+        run: |
+          cargo build \
+            --release \
+            --no-default-features \
+            -p sluggy
 
       - name: Log in to Docker Hub
         if: github.event_name != 'pull_request'
